@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Chowdown" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primaryRed</item>
+        <item name="colorPrimaryVariant">@color/primaryRedDark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:statusBarColor">@color/darkBackground</item>
+        <item name="android:windowBackground">@color/darkBackground</item>
+        <item name="android:textColorPrimary">@color/textPrimary</item>
+        <item name="android:textColorSecondary">@color/textSecondary</item>
+        <item name="colorSurface">@color/surfaceDark</item>
+        <item name="colorOnSurface">@color/textPrimary</item>
+    </style>
+</resources>

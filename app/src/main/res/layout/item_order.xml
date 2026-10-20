@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardBackgroundColor="@color/surface"
+    app:cardCornerRadius="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvOrderId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Order #72603109"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvOrderStatus"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/tvOrderDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Jun 22, 2026, 07:55 PM"
+            android:textColor="@color/gray"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvOrderId"
+            app:layout_constraintEnd_toStartOf="@id/tvOrderStatus"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/tvOrderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button_primary"
+            android:backgroundTint="#FF9800"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:text="PENDING"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tvOrderDate" />
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/light_gray"
+            app:layout_constraintTop_toBottomOf="@id/tvOrderDate" />
+
+        <ImageView
+            android:id="@+id/ivOrderImage"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:src="@color/light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+        <TextView
+            android:id="@+id/tvOrderItemName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Salmon Nigiri Set"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/ivOrderImage"
+            app:layout_constraintTop_toTopOf="@id/ivOrderImage"
+            app:layout_constraintEnd_toStartOf="@id/tvOrderItemPrice"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/tvOrderQuantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="Qty: 1"
+            android:textColor="@color/gray"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/ivOrderImage"
+            app:layout_constraintTop_toBottomOf="@id/tvOrderItemName"
+            app:layout_constraintEnd_toStartOf="@id/tvOrderItemPrice"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/tvOrderItemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R120.00"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivOrderImage" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/light_gray"
+            app:layout_constraintTop_toBottomOf="@id/ivOrderImage" />
+
+        <TextView
+            android:id="@+id/tvTotalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Total:"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider2"
+            app:layout_constraintBottom_toTopOf="@id/btnReorder"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tvOrderTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R135.00"
+            android:textColor="@color/primary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvTotalLabel"
+            app:layout_constraintBottom_toBottomOf="@id/tvTotalLabel" />
+
+        <Button
+            android:id="@+id/btnReorder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:background="@drawable/bg_button_primary"
+            android:text="Reorder"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTotalLabel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
