@@ -50,4 +50,4 @@ Chowdown is a native Android food ordering application built with Kotlin. It pro
 *(Add screenshots of your application here)*
 
 ## Developer
-Developed by Mlondi Shezi.
+Developed by Mlondi Shezi, Wandile Shobede, Siphamandla Tshabalala & sphumelele khuzwayo
