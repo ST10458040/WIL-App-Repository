@@ -10,5 +10,6 @@ data class Product(
     val rating: Double,
     val deliveryTime: String,
     val imageResId: Int,
-    val categoryId: String
+    val categoryId: String,
+    val modifiers: List<Modifier> = emptyList()
 ): Serializable

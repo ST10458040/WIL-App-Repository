@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,9 +13,12 @@ import com.example.chowdown.R
 import com.example.chowdown.models.Product
 
 class ProductAdapter(
-    private var products: List<Product>,
+    private var products: MutableList<Product>,
+    private val allProducts: List<Product>,
     private val onProductClick: (Product) -> Unit
-) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable {
+
+    private var currentCategory = "burgers"
 
     inner class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivImage: ImageView = view.findViewById(R.id.ivProductImage)
@@ -35,7 +40,6 @@ class ProductAdapter(
         holder.tvRating.text = "⭐ ${product.rating}"
         holder.tvDesc.text = product.description
         holder.tvPrice.text = String.format("R%.2f", product.price)
-        
         holder.ivImage.setImageResource(product.imageResId)
 
         holder.itemView.setOnClickListener { onProductClick(product) }
@@ -44,8 +48,34 @@ class ProductAdapter(
 
     override fun getItemCount(): Int = products.size
 
-    fun updateData(newProducts: List<Product>) {
-        products = newProducts
-        notifyDataSetChanged()
+    fun setCurrentCategory(category: String) {
+        currentCategory = category
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val query = constraint?.toString()?.trim() ?: ""
+                val filteredList = if (query.isEmpty()) {
+                    allProducts.filter { it.categoryId == currentCategory }
+                } else {
+                    allProducts.filter {
+                        it.name.contains(query, ignoreCase = true) ||
+                        it.description.contains(query, ignoreCase = true) ||
+                        it.categoryId.contains(query, ignoreCase = true)
+                    }
+                }
+                
+                return FilterResults().apply { values = filteredList }
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                val filtered = results?.values as? List<Product> ?: emptyList()
+                products.clear()
+                products.addAll(filtered)
+                notifyDataSetChanged()
+            }
+        }
     }
 }

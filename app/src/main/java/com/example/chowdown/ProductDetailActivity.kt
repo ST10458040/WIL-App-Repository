@@ -15,14 +15,8 @@ import com.example.chowdown.models.Product
 class ProductDetailActivity : AppCompatActivity() {
 
     private lateinit var product: Product
-    private val modifiers = listOf(
-        Modifier("1", "Extra Cheddar Cheese", 5.0),
-        Modifier("2", "No Onions", 0.0),
-        Modifier("3", "Add Bacon strips", 12.0),
-        Modifier("4", "Extra Patty", 15.0)
-    )
-
     private lateinit var tvTotalPrice: TextView
+    private lateinit var modifierAdapter: ModifierAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,16 +36,19 @@ class ProductDetailActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tvPrice)?.text = String.format("R%.2f", product.price)
         findViewById<TextView>(R.id.tvDescription)?.text = product.description
 
+        findViewById<TextView>(R.id.tvCustomizeLabel)?.text = "Customize your ${product.categoryId}"
+
         tvTotalPrice = findViewById(R.id.tvTotalPrice)
         updateTotalPrice()
 
         val rvModifiers = findViewById<RecyclerView>(R.id.rvModifiers)
-        rvModifiers?.adapter = ModifierAdapter(modifiers) {
+        modifierAdapter = ModifierAdapter(product.modifiers) {
             updateTotalPrice()
         }
+        rvModifiers?.adapter = modifierAdapter
 
         findViewById<Button>(R.id.btnAddToCart)?.setOnClickListener {
-            val selectedModifiers = modifiers.filter { it.isSelected }
+            val selectedModifiers = product.modifiers.filter { it.isSelected }
             CartManager.addItem(CartItem(product = product, modifiers = selectedModifiers, quantity = 1))
             Toast.makeText(this, "Added to cart!", Toast.LENGTH_SHORT).show()
             finish()
@@ -59,7 +56,7 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun updateTotalPrice() {
-        val modifierTotal = modifiers.filter { it.isSelected }.sumOf { it.price }
+        val modifierTotal = product.modifiers.filter { it.isSelected }.sumOf { it.price }
         val total = product.price + modifierTotal
         tvTotalPrice.text = String.format("R%.2f", total)
     }
